@@ -1,0 +1,8 @@
+{
+  "runtimeOptions": {
+    "additionalProbingPaths": [
+      "/Users/chrion/.dotnet/store/|arch|/|tfm|",
+      "/Users/chrion/.nuget/packages"
+    ]
+  }
+}

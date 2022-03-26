@@ -1,0 +1,12 @@
+@model Wedding
+
+<h3><a asp-controller="Wedding" asp-action="Index">Dashboard</a> | <a asp-controller="Home" asp-action="Logout">Logout</a></h3>
+<h1>@Model.Bride and @Model.Groom's Wedding</h1>
+<hr>
+<h4><strong>Date:</strong> @Model.Date.ToString("d")</h4>
+<h4><strong>Address:</strong> @Model.Address</h4>
+<h4><strong>Guests:</strong></h4>
+@foreach (var rsvp in @Model.Responses)
+{
+    <p>@rsvp.Guest.FullName</p>
+}

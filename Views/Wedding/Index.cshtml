@@ -1,0 +1,49 @@
+@model List<Wedding>
+<h1>Wedding Dashboard</h1>
+<a asp-controller="Home" asp-action="Logout">Log Out</a>
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>Wedding</th>
+            <th>Date</th>
+            <th>Guest Count</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach(var wedding in Model)
+    {
+        <tr>
+            <td><a asp-controller="Wedding" 
+                asp-action="Show" 
+                asp-route-weddingId="@wedding.WeddingId">@wedding.Bride @wedding.Groom</a></td>
+            <td>@wedding.Date</td>
+            <td>@wedding.Responses.Count()</td>
+            @{
+                if(wedding.UserId == ViewBag.UserId)
+                {
+                    <td><a asp-controller="Wedding" 
+                        asp-action="Remove"
+                        asp-route-weddingId="@wedding.WeddingId">DELETE</a></td>
+
+                }
+                else if(wedding.Responses.Any(r => r.UserId == ViewBag.UserId))
+                {
+                    <td><a asp-controller="Response" 
+                        asp-action="RSVP" 
+                        asp-route-weddingId="@wedding.WeddingId" 
+                        asp-route-status="remove">Un-RSVP</a></td>
+                }
+                else
+                {
+                    <td><a asp-controller="Response" 
+                        asp-action="RSVP" 
+                        asp-route-weddingId="@wedding.WeddingId" 
+                        asp-route-status="add">RSVP</a></td>
+                }
+            }
+        </tr>
+    }
+    </tbody>
+</table>
+<a asp-controller="Wedding" asp-action="New">New Wedding</a>
